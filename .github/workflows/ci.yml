@@ -59,19 +59,19 @@ jobs:
     needs: lint
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.6.0
+        uses: actions/checkout@2.321.0
 
       # Set up CodeQL
       - name: Set up CodeQL
-        uses: github/codeql-action/setup@v2.6.0
+        uses: github/codeql-action/setup@2.321.0
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2.6.0
+        uses: github/codeql-action/init@2.321.0
         with:
           languages: javascript,typescript  # JavaScript and TypeScript for React projects
 
       - name: Run CodeQL Analysis
-        uses: github/codeql-action/analyze@v2.6.0
+        uses: github/codeql-action/analyze@2.321.0
         with:
           category: 'security'
 
