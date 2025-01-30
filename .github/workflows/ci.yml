@@ -1,0 +1,53 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+      - 'bugfix/*'
+  pull_request:
+    branches:
+      - main
+      - 'feature/*'
+      - 'bugfix/*'
+
+jobs:
+  lint-test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run Mend Check (Software Composition Analysis)
+      - name: Run Mend Check
+        run: npx mend check
+
+      # Run CodeQL Analysis (Security and Code Quality)
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: 'security'
+
+   
+      # Run Jest tests (or any other test runner)
+      - name: Run Tests
+        run: npm test -- --ci --reporters=default --reporters=jest-junit
+
+      # Run other necessary checks, like linting (optional)
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+
+      # Build project
+      - name: Build project
+        run: npm run build
