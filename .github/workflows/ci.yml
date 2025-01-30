@@ -52,7 +52,7 @@ jobs:
 
       # Run Jest tests (or any other test runner)
       - name: Run Tests
-        run: npm test -- --ci --reporters=default --reporters=jest-junit
+        run: npm test 
 
   codeql-analysis:
     runs-on: ubuntu-latest

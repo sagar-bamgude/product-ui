@@ -52,13 +52,6 @@
     "jest-junit": "^16.0.0"
   },
   "jest": {
-    "reporters": [
-    "default",
-    ["jest-junit", {
-      "outputDirectory": "test-results",
-      "outputName": "jest.xml"
-    }]
-  ],
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     },
