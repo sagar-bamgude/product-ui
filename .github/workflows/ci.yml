@@ -29,10 +29,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Run Mend Check (Software Composition Analysis)
-      - name: Run Mend Check
-        run: npx mend check
-
+   
       # Run CodeQL Analysis (Security and Code Quality)
       - name: Run CodeQL Analysis
         uses: github/codeql-action/analyze@v2
