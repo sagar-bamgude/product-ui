@@ -23,8 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-     "lint": "eslint \"src/**/*.{js,jsx}\""
-
+    "lint": "eslint \"src/**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -49,9 +48,17 @@
     "@babel/preset-env": "^7.26.7",
     "@babel/preset-react": "^7.26.3",
     "babel-jest": "^29.7.0",
-    "eslint-config-react-app": "^7.0.1"
+    "eslint-config-react-app": "^7.0.1",
+    "jest-junit": "^16.0.0"
   },
   "jest": {
+    "reporters": [
+    "default",
+    ["jest-junit", {
+      "outputDirectory": "test-results",
+      "outputName": "jest.xml"
+    }]
+  ],
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     },
