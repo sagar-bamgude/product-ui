@@ -38,6 +38,7 @@ const App = () => {
   const fetchProducts = async () => {
     const response = await axios.get('http://localhost:5000/products');
     setProducts(response.data);
+    setCart([])
   };
 
   const handleLogin = async () => {
@@ -92,7 +93,7 @@ const App = () => {
         </div>
       ) : (
         <div>
-          <Typography variant="h4">Hey Welcome, {role === 'admin' ? 'Admin' : 'User'}</Typography>
+          <Typography variant="h4">Hey Welcome sagar, {role === 'admin' ? 'Admin' : 'User'}</Typography>
 
           {/* Admin Controls */}
           {role === 'admin' && (
