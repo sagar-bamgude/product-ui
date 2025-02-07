@@ -93,7 +93,7 @@ const App = () => {
         </div>
       ) : (
         <div>
-          <Typography variant="h4">Hey Welcome, {role === 'admin' ? 'Admin' : 'User'}</Typography>
+          <Typography variant="h4">Hey Welcome sagar, {role === 'admin' ? 'Admin' : 'User'}</Typography>
 
           {/* Admin Controls */}
           {role === 'admin' && (
