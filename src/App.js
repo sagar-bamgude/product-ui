@@ -30,20 +30,23 @@ const App = () => {
   const [productDialogOpen, setProductDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [newProduct, setNewProduct] = useState({ name: '', price: '', stock: '' });
+  const apiUrl = process.env.REACT_APP_NODE_API;
+
+  
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
-    const response = await axios.get('http://localhost:5000/products');
+    const response = await axios.get(`${apiUrl}product`);
     setProducts(response.data);
     setCart([])
   };
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/login', { username, password });
+      const response = await axios.post(`${apiUrl}login`, { username, password });
       setIsLoggedIn(true);
       setRole(response.data.role);
     } catch (error) {
@@ -54,31 +57,31 @@ const App = () => {
   const handleAddToCart = async (productId) => {
     const quantity = prompt('Enter quantity:', 1);
     if (quantity) {
-      await axios.post('http://localhost:5000/cart', { userId: 'some-user-id', productId, quantity: parseInt(quantity) });
+      await axios.post(`${apiUrl}cart`, { userId: 'some-user-id', productId, quantity: parseInt(quantity) });
       alert('Added to cart!');
     }
   };
 
   const handleCreateProduct = async () => {
-    await axios.post('http://localhost:5000/products', newProduct);
+    await axios.post(`${apiUrl}products`, newProduct);
     fetchProducts();
     setProductDialogOpen(false);
   };
 
   const handleDeleteProduct = async (productId) => {
-    await axios.delete(`http://localhost:5000/products/${productId}`);
+    await axios.delete(`${apiUrl}products/${productId}`);
     fetchProducts();
   };
 
   const handleEditProduct = async () => {
     const { name, price, stock } = selectedProduct;
-    await axios.put(`http://localhost:5000/products/${selectedProduct._id}`, { name, price, stock });
+    await axios.put(`${apiUrl}products/${selectedProduct._id}`, { name, price, stock });
     fetchProducts();
     setProductDialogOpen(false);
   };
 
   const handlePurchase = async () => {
-    const response = await axios.post('http://localhost:5000/cart/purchase', { userId: 'some-user-id' });
+    const response = await axios.post(`${apiUrl}cart/purchase`, { userId: 'some-user-id' });
     alert(response.data);
   };
 
